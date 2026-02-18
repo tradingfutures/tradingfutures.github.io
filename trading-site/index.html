@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Futures Trading Resources</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Bebas+Neue&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080b0f;
+    --surface: #0e1318;
+    --card: #111820;
+    --border: #1c2535;
+    --accent: #38bdf8;
+    --accent-green: #34d399;
+    --accent-orange: #fb923c;
+    --text: #dde6f0;
+    --text-dim: #5a6e88;
+    --text-mid: #8fa3bd;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', sans-serif;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Animated grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(56,189,248,0.07) 1px, transparent 1px);
+    background-size: 28px 28px;
+    pointer-events: none;
+    z-index: 0;
+    animation: gridPulse 4s ease-in-out infinite;
+  }
+
+  @keyframes gridPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+
+  /* Hero section */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-content {
+    max-width: 800px;
+    text-align: center;
+  }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeDown 0.8s 0.2s ease forwards;
+  }
+
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 10vw, 96px);
+    letter-spacing: 0.05em;
+    line-height: 0.95;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeDown 0.8s 0.4s ease forwards;
+  }
+
+  h1 .word1 { 
+    display: block;
+    color: var(--text); 
+  }
+
+  h1 .word2 { 
+    display: block;
+    color: var(--accent);
+    text-shadow: 0 0 40px rgba(56,189,248,0.3);
+  }
+
+  .tagline {
+    font-size: 18px;
+    color: var(--text-mid);
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    margin-bottom: 48px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0;
+    animation: fadeDown 0.8s 0.6s ease forwards;
+  }
+
+  /* Card grid */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto 60px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s ease forwards;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px 28px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  .card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(56,189,248,0.15);
+  }
+
+  .card-icon {
+    font-size: 32px;
+    margin-bottom: 16px;
+    filter: grayscale(0.3);
+  }
+
+  .card h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    letter-spacing: 0.02em;
+  }
+
+  .card p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-dim);
+    font-weight: 300;
+  }
+
+  .card-label {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(56,189,248,0.1);
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-top: 16px;
+  }
+
+  /* Footer status bar */
+  .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    z-index: 100;
+    opacity: 0;
+    animation: fadeUp 0.8s 1s ease forwards;
+  }
+
+  .footer-left {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-green);
+    box-shadow: 0 0 8px var(--accent-green);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .footer-right {
+    color: var(--text-dim);
+  }
+
+  /* Price ticker */
+  .price-ticker {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.7s ease forwards;
+  }
+
+  .ticker-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 16px;
+  }
+
+  .ticker-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+
+  .ticker-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .ticker-symbol {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-mid);
+  }
+
+  .ticker-price {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .ticker-price.mnq { color: #38bdf8; }
+  .ticker-price.mes { color: #34d399; }
+  .ticker-price.m2k { color: #fb923c; }
+
+  .ticker-change {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+  }
+
+  .ticker-change.up { color: #22c55e; }
+  .ticker-change.down { color: #f43f5e; }
+
+  .ticker-loading {
+    color: var(--text-dim);
+    font-style: italic;
+    font-size: 12px;
+  }
+
+  .ticker-error {
+    color: var(--text-dim);
+    font-size: 11px;
+    font-style: italic;
+  }
+
+  /* Animations */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .hero { padding: 60px 20px 100px; }
+    .cards { grid-template-columns: 1fr; }
+    .footer { flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-content">
+    <div class="eyebrow">Learning · Building · Trading</div>
+    <h1>
+      <span class="word1">FUTURES</span>
+      <span class="word2">REFERENCE</span>
+    </h1>
+    <p class="tagline">
+      Personal trading resources and margin calculators for micro futures contracts
+    </p>
+
+    <!-- Live Price Ticker -->
+    <div class="price-ticker">
+      <div class="ticker-title">📊 Live Micro Futures Prices</div>
+      <div class="ticker-grid">
+        <div class="ticker-item">
+          <div class="ticker-symbol">MNQ · Micro Nasdaq-100</div>
+          <div class="ticker-price mnq" id="mnq-price">
+            <span class="ticker-loading">Loading...</span>
+          </div>
+          <div class="ticker-change" id="mnq-change"></div>
+        </div>
+        <div class="ticker-item">
+          <div class="ticker-symbol">MES · Micro S&P 500</div>
+          <div class="ticker-price mes" id="mes-price">
+            <span class="ticker-loading">Loading...</span>
+          </div>
+          <div class="ticker-change" id="mes-change"></div>
+        </div>
+        <div class="ticker-item">
+          <div class="ticker-symbol">M2K · Micro Russell 2000</div>
+          <div class="ticker-price m2k" id="m2k-price">
+            <span class="ticker-loading">Loading...</span>
+          </div>
+          <div class="ticker-change" id="m2k-change"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cards">
+      <a href="micro-futures.html" class="card">
+        <div class="card-icon">📊</div>
+        <h3>Micro Futures Chart</h3>
+        <p>Compare MNQ, MES, and M2K day trading margins, liquidation risks, and P&L scenarios with a $200 account.</p>
+        <span class="card-label">Interactive Tool</span>
+      </a>
+
+      <a href="trade-journal.html" class="card">
+        <div class="card-icon">📝</div>
+        <h3>Trade Journal</h3>
+        <p>Track paper trading performance, analyze patterns, and document lessons learned.</p>
+        <span class="card-label">Interactive Tool</span>
+      </a>
+
+      <a href="risk-calculator.html" class="card">
+        <div class="card-icon">🧮</div>
+        <h3>Risk Calculator</h3>
+        <p>Calculate position sizing, stop loss levels, and risk/reward ratios for any trade setup.</p>
+        <span class="card-label">Interactive Tool</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="footer-left">
+    <div class="status-dot"></div>
+    <span>Paper Trading Mode</span>
+  </div>
+  <div class="footer-right">
+    Built with HTML · Hosted on Netlify
+  </div>
+</div>
+
+<script>
+// Fetch index prices as proxies for micro futures
+// MNQ tracks NDX, MES tracks SPX, M2K tracks RUT
+async function fetchFuturesPrices() {
+  const apiKey = 'YOUR_FINNHUB_KEY_HERE'; // Replace with your actual Finnhub API key
+  
+  const indexMap = {
+    MNQ: ['QQQ'],   // QQQ ETF tracks Nasdaq-100 (multiply by ~10 for index approximation)
+    MES: ['SPY'],   // SPY ETF tracks S&P 500 (multiply by ~10 for index approximation)
+    M2K: ['IWM']    // IWM ETF tracks Russell 2000 (multiply by ~10 for index approximation)
+  };
+
+  for (const [contract, symbols] of Object.entries(indexMap)) {
+    let success = false;
+    const symbolsToTry = Array.isArray(symbols) ? symbols : [symbols];
+    
+    for (const indexSymbol of symbolsToTry) {
+      if (success) break;
+      
+      try {
+        const response = await fetch(`https://finnhub.io/api/v1/quote?symbol=${indexSymbol}&token=${apiKey}`);
+        
+        if (!response.ok) {
+          continue; // Try next symbol
+        }
+        
+        const result = await response.json();
+        
+        if (result && result.c && result.c > 0) {
+          // ETFs trade at 1/10th the index price, so multiply by ~10 to approximate index
+          const multiplier = 10;
+          const currentPrice = result.c * multiplier;
+          const change = (result.d || 0) * multiplier;
+          const changePercent = result.dp || 0;
+          
+          // Update price
+          const priceEl = document.getElementById(`${contract.toLowerCase()}-price`);
+          priceEl.innerHTML = currentPrice.toFixed(2);
+          
+          // Update change
+          const changeEl = document.getElementById(`${contract.toLowerCase()}-change`);
+          const changeSign = change >= 0 ? '+' : '';
+          changeEl.textContent = `${changeSign}${change.toFixed(2)} (${changeSign}${changePercent.toFixed(2)}%)`;
+          changeEl.className = `ticker-change ${change >= 0 ? 'up' : 'down'}`;
+          
+          success = true;
+        }
+      } catch (err) {
+        console.warn(`Failed to fetch ${contract} with symbol ${indexSymbol}:`, err);
+      }
+    }
+    
+    if (!success) {
+      console.warn(`All symbols failed for ${contract}, using fallback`);
+      setFallbackPrice(contract);
+    }
+  }
+}
+
+function setFallbackPrice(contract) {
+  // Updated fallback prices based on current market levels (Feb 2026)
+  const fallbackPrices = {
+    MNQ: { price: 25000, change: 0, changePercent: 0 },
+    MES: { price: 7000, change: 0, changePercent: 0 },
+    M2K: { price: 2600, change: 0, changePercent: 0 }
+  };
+  
+  const data = fallbackPrices[contract];
+  const priceEl = document.getElementById(`${contract.toLowerCase()}-price`);
+  priceEl.innerHTML = `${data.price.toFixed(2)} <span class="ticker-error">(est.)</span>`;
+  
+  const changeEl = document.getElementById(`${contract.toLowerCase()}-change`);
+  changeEl.textContent = 'Using estimated price - check API key or market status';
+  changeEl.className = 'ticker-change';
+  changeEl.style.color = 'var(--text-dim)';
+}
+
+// Fetch on load
+fetchFuturesPrices();
+
+// Refresh every 60 seconds
+setInterval(fetchFuturesPrices, 60000);
+</script>
+
+</body>
+</html>
